@@ -1,0 +1,1084 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Nat Thoughts.</title>
+    <!-- Favicon placeholder - replace with your actual favicon -->
+    <link rel="icon" type="image/png" href="icon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="min-h-screen text-gray-200 antialiased">
+    <!-- Modern Toast Notification -->
+    <div id="toast" class="toast">
+      <div class="toast-icon">
+        <i class="fas fa-trophy"></i>
+      </div>
+      <div class="toast-content">
+        <div class="toast-title">Achievement Unlocked!</div>
+        <div class="toast-message">Key Skills Highlighted</div>
+      </div>
+      <div class="toast-progress"></div>
+    </div>
+
+    <div class="mx-auto max-w-4xl px-6 py-10">
+      <!-- HEADER - UPDATED NAVIGATION -->
+      <header class="mb-6 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <div class="font-mono text-2xl font-bold tracking-wider text-white">
+            NATNAEL<span class="ml-2">G</span>
+          </div>
+        </div>
+
+        <div
+          class="fixed top-6 right-6 z-30 flex items-center gap-4 bg-[#0a0a0a]/80 backdrop-blur-md p-3 rounded-full border border-gray-800 shadow-lg"
+        >
+          <button
+            id="menu-btn"
+            class="text-gray-300 hover:text-white focus:outline-none flex items-center justify-center"
+          >
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <!-- MAP / HERO CARD -->
+      <section
+        class="glass-map ethiopia-map grid-pattern section-spacing overflow-hidden rounded-xl bg-gradient-to-b from-transparent to-transparent shadow-lg"
+        style="height: 220px"
+      >
+        <!-- Map Background with Grid -->
+        <div
+          class="absolute inset-0 bg-gradient-to-br from-blue-900/30 to-indigo-900/20"
+        ></div>
+
+        <!-- Ethiopia Map Outline -->
+        <div class="map-container">
+          <img
+            src="ethiopia.jpg"
+            alt="ethiopia map"
+            style="
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              object-fit: cover;
+              object-position: center;
+              opacity: 0.4;
+            "
+          />
+        </div>
+
+        <!-- Animated elements -->
+        <img
+          src="https://duyle.dev/cloud.webp"
+          alt="cloud"
+          class="animate-cloud absolute top-8 w-60 opacity-70"
+        />
+        <img
+          src="https://duyle.dev/cloud.webp"
+          alt="cloud"
+          class="animate-cloud absolute top-4 w-40 opacity-50"
+          style="animation-delay: -30s; animation-duration: 40s"
+        />
+
+        <!-- Plane flying across - UPDATED SECTION -->
+        <div class="animate-plane absolute top-1/3">
+          <div class="airplane-container">
+            <!-- Replace the placeholder with your actual Airplane.webm file -->
+            <video autoplay loop muted playsinline class="airplane-video">
+              <!-- Replace "Airplane.webm" with your actual file path -->
+              <source src="Airplane.webm" type="video/webm" />
+              <!-- Fallback if WebM is not supported -->
+              Your browser does not support the video tag.
+            </video>
+            <!-- Fallback placeholder if video doesn't load -->
+            <div class="airplane-placeholder">Airplane Animation</div>
+          </div>
+        </div>
+
+        <!-- Location pin for Addis Ababa -->
+        <div class="map-pin"></div>
+
+        <!-- Location text -->
+        <div
+          class="location-text absolute bottom-4 left-4 rounded-lg px-4 py-2 text-sm"
+        >
+          <div class="flex items-center gap-2">
+            <i class="fas fa-map-marker-alt text-red-400"></i>
+            <span class="font-medium">Addis Ababa, Ethiopia</span>
+            <span class="text-xs text-gray-400">9.0°N, 38.7°E</span>
+          </div>
+        </div>
+
+        <!-- Enhanced blur transition overlay -->
+        <div class="blur-transition"></div>
+
+        <!-- time badge -->
+        <div class="flex justify-end p-4">
+          <div
+            id="ethiopian-time"
+            class="time-badge inline-flex items-center rounded-md bg-black/50 px-3 py-2 font-mono text-sm text-gray-200"
+          >
+            Loading...
+          </div>
+        </div>
+      </section>
+
+      <!-- profile block -->
+      <section id="about" class="section-spacing relative z-10 -mt-10">
+        <div class="rounded-lg bg-transparent p-6">
+          <div class="flex items-center gap-6">
+            <!-- PERFECT AVATAR EFFECT -->
+            <div class="avatar-container">
+              <div class="avatar-progress" id="avatar-progress"></div>
+              <div class="avatar-image">
+                <img src="natiIMG.jpg" />
+                <!-- OVERLAY IMAGE - Replace with your achievement image URL -->
+                <img
+                  src="cool.png"
+                  alt="achievement"
+                  class="avatar-overlay"
+                  id="avatar-overlay"
+                />
+              </div>
+            </div>
+
+            <div class="flex-1">
+              <h1
+                class="text-2xl font-semibold tracking-tighter text-white md:text-3xl"
+              >
+                Hey, I'm Natnael (nati)
+                <span class="wave-hover cursor-pointer">👋</span>
+              </h1>
+              <div class="mt-2 flex items-center gap-4">
+                <a
+                  href="mailto:nat.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  class="group flex cursor-pointer items-center gap-1.5"
+                >
+                  <div class="pulse-dot size-2 rounded-full bg-green-500"></div>
+                  <div class="relative overflow-hidden">
+                    <p class="group text-gray-400">
+                      <span
+                        class="flex flex-col border-b border-dashed transition-all duration-300 ease-in-out group-hover:-translate-y-full"
+                        >Available for work<span class="invisible h-0">
+                          Reach out</span
+                        ></span
+                      >
+                      <span
+                        class="absolute top-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:-translate-y-full"
+                        >Reach out
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="24"
+                          height="24"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          class="ml-1 size-4"
+                        >
+                          <rect
+                            width="20"
+                            height="16"
+                            x="2"
+                            y="4"
+                            rx="2"
+                          ></rect>
+                          <path
+                            d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"
+                          ></path>
+                        </svg>
+                      </span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- description with highlightable achievements -->
+          <div class="mt-6 max-w-2xl">
+            <p class="text-sm text-gray-300 cursor-text" id="description-text">
+              I'm a
+              <span class="highlightable" data-skill="creative"
+                >creative software developer</span
+              >
+              with experience in
+              <span class="highlightable" data-skill="fullstack"
+                >full-stack development</span
+              >,
+              <span class="highlightable" data-skill="uiux">UI/UX design</span>.
+              I specialize in building
+              <span class="highlightable" data-skill="ux"
+                >engaging user experiences</span
+              >
+              with great attention to detail and performance. I've helped
+              <span class="highlightable" data-skill="performance"
+                >improve app responsiveness by 20%</span
+              >
+              and
+              <span class="highlightable" data-skill="engagement"
+                >increased user engagement by 40%</span
+              >
+              through optimized solutions.
+            </p>
+          </div>
+
+          <!-- Social buttons and profile image from Natnael's code -->
+          <div class="mt-5 flex items-center gap-3">
+            <a
+              href="resume.html"
+              class="hover-glow bg-dark-200 hover:bg-dark-100 flex items-center gap-2 rounded-md px-4 py-2 text-sm transition"
+            >
+              <i class="fas fa-file-alt"></i> Resume
+            </a>
+            <a
+              href="https://linkedin.com/in/natnael-getachew"
+              target="_blank"
+              class="rounded-md border border-gray-700 p-2 text-sm transition hover:border-purple-600 hover:text-white"
+              title="LinkedIn"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/NatiDevHQ"
+              target="_blank"
+              class="rounded-md border border-gray-700 p-2 text-sm transition hover:border-purple-600 hover:text-white"
+              title="GitHub"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="mailto:Natigech35@gmail.com"
+              class="rounded-md border border-gray-700 p-2 text-sm transition hover:border-purple-600 hover:text-white"
+              title="Email"
+            >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work / Education Tabs - UPDATED SECTION -->
+      <section
+        id="experience"
+        class="section-spacing mb-12 rounded-xl border border-gray-800 overflow-hidden"
+      >
+        <!-- Tabs -->
+        <div class="p-6 border-b border-gray-800">
+          <div
+            class="grid grid-cols-2 gap-2 p-1 bg-gray-900 rounded-lg w-full max-w-md mx-auto"
+          >
+            <button
+              id="work-tab"
+              class="tab-active py-3 px-4 rounded-md font-medium transition-all duration-300"
+            >
+              Work
+            </button>
+            <button
+              id="education-tab"
+              class="tab-inactive py-3 px-4 rounded-md font-medium transition-all duration-300"
+            >
+              Education
+            </button>
+          </div>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="work-content" class="tab-content p-6">
+          <div class="rounded-lg overflow-hidden">
+            <div class="p-0">
+              <ul class="ml-10 border-l border-gray-800">
+                <!-- Fanos Tech -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-indigo-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="fanos.jfif"
+                        alt="Fanos Tech"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>Present</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Fanos Tech
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Fullstack Developer
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Building scalable full-stack applications and RESTful
+                        APIs.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Collaborating with the team to deliver high-quality tech
+                        solutions.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-indigo-900/30 text-indigo-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-indigo-700/30"
+                    >
+                      <i class="fas fa-code text-indigo-400"></i>
+                      Fullstack Development
+                    </div>
+                  </div>
+                </li>
+
+                <!-- TALMIDSLN -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-blue-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="talmid.png"
+                        alt="TALMIDSLN"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>6 months ago</span>
+                      <span> - </span>
+                      <span>Present</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      TALMIDSLN
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Software Developer • Full-time
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Core developer on Yuno, a gamified learning app that
+                        helps students learn 2× faster through interactive
+                        quizzes.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Designed and implemented the database schema and
+                        optimised queries — reduced server message size by 15%,
+                        contributing to a ~20% improvement in app
+                        responsiveness.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Built interactive features that increased user
+                        engagement by 40%.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Implemented backend APIs and integrations for
+                        authentication and real-time updates.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fab fa-react text-blue-400"></i>
+                      React Native
+                    </div>
+                    <div
+                      class="bg-green-900/30 text-green-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-green-700/30"
+                    >
+                      <i class="fas fa-database text-green-400"></i>
+                      Database Design
+                    </div>
+                    <div
+                      class="bg-purple-900/30 text-purple-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-purple-700/30"
+                    >
+                      <i class="fas fa-code text-purple-400"></i>
+                      API Development
+                    </div>
+                  </div>
+                </li>
+
+                <!-- ABO Solutions -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-green-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <div
+                        class="w-10 h-10 rounded-full bg-green-900/50 flex items-center justify-center text-green-300 font-bold"
+                      >
+                        ABO
+                      </div>
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2 months</span>
+                      <span> • </span>
+                      <span>Contract</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      ABO Solutions
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      UI/UX Designer
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Designed a clean and user-preferred UI that improved
+                        usability and clarity for the target users.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Delivered design systems and handed off high-fidelity
+                        assets for development.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-pink-900/30 text-pink-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-pink-700/30"
+                    >
+                      <i class="fas fa-palette text-pink-400"></i>
+                      UI/UX Design
+                    </div>
+                    <div
+                      class="bg-yellow-900/30 text-yellow-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-yellow-700/30"
+                    >
+                      <i class="fas fa-object-group text-yellow-400"></i>
+                      Design Systems
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Afronex -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-red-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="afronex.jfif"
+                        alt="Afronex"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>1 month</span>
+                      <span> • </span>
+                      <span>Part-time</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Afronex
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Frontend Developer (Intern)
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Collaborated with the team to build an interactive and
+                        responsive web application using modern frontend
+                        practices.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Built reusable components to improve development speed
+                        and consistency across the app.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-yellow-900/30 text-yellow-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-yellow-700/30"
+                    >
+                      <i class="fab fa-js-square text-yellow-400"></i>
+                      JavaScript
+                    </div>
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fab fa-react text-blue-400"></i>
+                      React
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Arife Tech -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-purple-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="arif.jpg"
+                        alt="Arife Tech"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>1 year, 6 months ago</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Arife Tech
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Backend Developer • Full-time
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Built backend services using Python and Django.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Optimized delivery workflows and APIs, improving
+                        delivery time by 16%.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Worked closely with frontend teams to ensure smooth
+                        integrations and reliable deployments.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fab fa-python text-blue-400"></i>
+                      Python
+                    </div>
+                    <div
+                      class="bg-green-900/30 text-green-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-green-700/30"
+                    >
+                      <i class="fas fa-server text-green-400"></i>
+                      Django
+                    </div>
+                    <div
+                      class="bg-red-900/30 text-red-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-red-700/30"
+                    >
+                      <i class="fas fa-tachometer-alt text-red-400"></i>
+                      Optimization
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Inhubstudio -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-pink-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="inhubstudio.png"
+                        alt="Inhubstudio"
+                        class="w-10 h-10 rounded-full object-cover bg-gray-800"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>1 year</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Inhubstudio
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Fullstack Developer
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Developed full-stack web applications and backend APIs.
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Designed brand identities, including the company logo.
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fas fa-code text-blue-400"></i>
+                      Fullstack
+                    </div>
+                    <div
+                      class="bg-pink-900/30 text-pink-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-pink-700/30"
+                    >
+                      <i class="fas fa-palette text-pink-400"></i>
+                      Design
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="education-content" class="tab-content hidden p-6">
+          <div class="rounded-lg overflow-hidden">
+            <div class="p-0">
+              <ul class="ml-10 border-l border-gray-800">
+                <!-- Dire Dawa University -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-blue-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="ddu.jfif"
+                        alt="Dire Dawa University"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2018</span>
+                      <span> - </span>
+                      <span>2022</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Dire Dawa University
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      B.Sc. in Information Technology
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Graduated with a focus on software development and
+                        information systems
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Completed coursework in database management, web
+                        development, and networking
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Participated in university programming competitions and
+                        tech events
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fas fa-graduation-cap text-blue-400"></i>
+                      Bachelor's Degree
+                    </div>
+                    <div
+                      class="bg-purple-900/30 text-purple-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-purple-700/30"
+                    >
+                      <i class="fas fa-laptop-code text-purple-400"></i>
+                      IT Fundamentals
+                    </div>
+                  </div>
+                </li>
+
+                <!-- ALX Africa -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-yellow-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="alx.jfif"
+                        alt="ALX Africa"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2022</span>
+                      <span> - </span>
+                      <span>2023</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      ALX Africa
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Backend Development Program
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Intensive backend development program focusing on
+                        Python, APIs, and database management
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Completed hands-on projects including building RESTful
+                        APIs and database design
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Learned best practices for software development and
+                        collaboration in team environments
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-yellow-900/30 text-yellow-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-yellow-700/30"
+                    >
+                      <i class="fab fa-python text-yellow-400"></i>
+                      Python
+                    </div>
+                    <div
+                      class="bg-green-900/30 text-green-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-green-700/30"
+                    >
+                      <i class="fas fa-server text-green-400"></i>
+                      Backend
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Udacity -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-blue-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="udacity.jfif"
+                        alt="Udacity"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2021</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Udacity
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Foundations of Data Analysis
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Learned statistical analysis, data wrangling, and
+                        visualization techniques
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Completed projects using Python libraries like Pandas,
+                        NumPy, and Matplotlib
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Gained skills in interpreting data and making
+                        data-driven decisions
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fas fa-chart-bar text-blue-400"></i>
+                      Data Analysis
+                    </div>
+                    <div
+                      class="bg-green-900/30 text-green-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-green-700/30"
+                    >
+                      <i class="fab fa-python text-green-400"></i>
+                      Python
+                    </div>
+                  </div>
+                </li>
+
+                <!-- freeCodeCamp -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-green-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="free.png"
+                        alt="freeCodeCamp"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2020</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      freeCodeCamp
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Frontend Development Certificate
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Completed comprehensive curriculum covering HTML, CSS,
+                        JavaScript, and responsive design
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Built multiple projects including responsive web
+                        applications and interactive UI components
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Learned modern frontend development practices and
+                        accessibility standards
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-yellow-900/30 text-yellow-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-yellow-700/30"
+                    >
+                      <i class="fab fa-js-square text-yellow-400"></i>
+                      JavaScript
+                    </div>
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fab fa-html5 text-blue-400"></i>
+                      HTML/CSS
+                    </div>
+                  </div>
+                </li>
+
+                <!-- Safaricom Talent Cloud -->
+                <li class="relative ml-10 py-6 timeline-item-new">
+                  <div
+                    class="absolute -left-16 top-6 flex items-center justify-center rounded-full"
+                  >
+                    <div
+                      class="w-12 h-12 border-2 border-purple-400 rounded-full flex items-center justify-center bg-gray-900 avatar-new shadow-sm"
+                    >
+                      <img
+                        src="safaricom.jfif"
+                        alt="Safaricom"
+                        class="w-10 h-10 rounded-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div class="flex flex-1 flex-col justify-start gap-1">
+                    <time class="text-xs text-gray-400 font-medium">
+                      <span>2022</span>
+                    </time>
+                    <h2 class="font-bold text-lg leading-none text-white">
+                      Safaricom Talent Cloud
+                    </h2>
+                    <p class="text-sm text-gray-400 font-medium">
+                      Frontend Development
+                    </p>
+                    <ul class="ml-4 list-outside list-disc mt-3 space-y-2">
+                      <li class="text-sm text-gray-300">
+                        Participated in intensive frontend development training
+                        program
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Focused on React.js, modern JavaScript, and responsive
+                        design principles
+                      </li>
+                      <li class="text-sm text-gray-300">
+                        Collaborated on team projects simulating real-world
+                        development workflows
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="mt-4 flex flex-row flex-wrap items-start gap-2">
+                    <div
+                      class="bg-blue-900/30 text-blue-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-blue-700/30"
+                    >
+                      <i class="fab fa-react text-blue-400"></i>
+                      React
+                    </div>
+                    <div
+                      class="bg-yellow-900/30 text-yellow-300 px-3 py-1.5 rounded-full text-xs font-medium flex gap-2 items-center badge border border-yellow-700/30"
+                    >
+                      <i class="fab fa-js-square text-yellow-400"></i>
+                      JavaScript
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Skills Grid Section - UPDATED WITH MAGIC BENTO -->
+      <section id="skills" class="section-spacing">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-white">
+            skills & technologies
+          </h2>
+        </div>
+
+        <!-- Magic Bento Skills Grid -->
+        <div class="bento-section">
+          <div class="card-grid skills-grid" id="skillsGrid">
+            <!-- Cards will be generated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects - UPDATED WITH MAGIC BENTO -->
+      <section id="projects" class="section-spacing mb-10">
+        <div class="mb-4 flex items-center justify-between">
+          <h2 class="text-lg font-semibold text-white">featured projects</h2>
+          <a
+            href="#"
+            class="text-sm text-gray-400 transition-colors hover:text-white"
+            >view more →</a
+          >
+        </div>
+
+        <!-- Magic Bento Projects Grid -->
+        <div class="bento-section">
+          <div class="card-grid projects-grid" id="projectsGrid">
+            <!-- Cards will be generated by JavaScript -->
+          </div>
+        </div>
+      </section>
+
+      <!-- footer spacing -->
+      <div class="h-12">
+        <footer
+          id="contact"
+          class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-6 text-xs text-gray-500 md:flex-row"
+        >
+          <p>
+            © 2025 <span class="text-white">Natnael Getachew</span> |
+            <a href="#" class="transition-colors hover:text-white">privacy?</a>
+          </p>
+          <div class="flex gap-4 text-base text-gray-400">
+            <a
+              href="https://linkedin.com/in/natnael-getachew"
+              target="_blank"
+              class="transition-colors hover:text-white"
+            >
+              <i class="fab fa-linkedin"></i>
+            </a>
+            <a
+              href="https://github.com/NatiDevHQ"
+              target="_blank"
+              class="transition-colors hover:text-white"
+            >
+              <i class="fab fa-github"></i>
+            </a>
+            <a
+              href="mailto:Natigech35@gmail.com"
+              class="transition-colors hover:text-white"
+            >
+              <i class="fas fa-envelope"></i>
+            </a>
+            <a href="#" class="transition-colors hover:text-white">
+              <i class="fas fa-file-alt"></i>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </div>
+    <!-- Mobile Menu Overlay -->
+    <div
+      id="menu-overlay"
+      class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"
+    ></div>
+
+    <!-- Side Navigation Menu -->
+    <div
+      id="side-menu"
+      class="fixed top-0 right-0 h-full w-64 bg-[#0a0a0a] border-l border-gray-800 z-50 transform translate-x-full transition-transform duration-300 ease-in-out shadow-2xl"
+    >
+      <div class="flex justify-end p-6">
+        <button
+          id="close-menu-btn"
+          class="text-gray-400 hover:text-white focus:outline-none transition-colors"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <nav class="flex flex-col space-y-6 px-8 mt-4">
+        <a
+          href="#about"
+          class="side-nav-link text-lg font-medium text-gray-300 transition-colors hover:text-white hover:translate-x-1 transform duration-200"
+          >About</a
+        >
+        <a
+          href="#experience"
+          class="side-nav-link text-lg font-medium text-gray-300 transition-colors hover:text-white hover:translate-x-1 transform duration-200"
+          >Experience</a
+        >
+        <a
+          href="#projects"
+          class="side-nav-link text-lg font-medium text-gray-300 transition-colors hover:text-white hover:translate-x-1 transform duration-200"
+          >Projects</a
+        >
+        <a
+          href="#skills"
+          class="side-nav-link text-lg font-medium text-gray-300 transition-colors hover:text-white hover:translate-x-1 transform duration-200"
+          >Skills</a
+        >
+        <a
+          href="#contact"
+          class="side-nav-link text-lg font-medium text-gray-300 transition-colors hover:text-white hover:translate-x-1 transform duration-200"
+          >Contact</a
+        >
+      </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+  </body>
+</html>

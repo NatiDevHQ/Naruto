@@ -379,6 +379,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fetch from backend
   fetchPortfolioData();
+
+  // Start Mentor Tour if not completed
+  if (!localStorage.getItem("mentorTourCompleted")) {
+    // slight delay to allow rendering
+    setTimeout(startMentorTour, 500);
+  }
 });
 
 // --- DYNAMIC BACKEND INTEGRATION ---
@@ -972,3 +978,48 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// --- MENTOR TOUR GUIDE ---
+function startMentorTour() {
+  if (typeof window.driver !== "undefined") {
+    const driver = window.driver.js.driver;
+    const tour = driver({
+      showProgress: true,
+      steps: [
+        {
+          popover: {
+            title: 'Hi Mentor! 👋',
+            description: 'Welcome to the portfolio! Let me give you a quick tour of the dynamic features built into this page.',
+            align: 'center'
+          }
+        },
+        {
+          element: '#edit-profile-btn',
+          popover: {
+            title: 'Edit Profile',
+            description: 'Click here to easily update your name, bio, profile image, and description. Changes will save directly to the database.',
+            side: "bottom",
+            align: 'start'
+          }
+        },
+        {
+          element: '#add-project-btn',
+          popover: {
+            title: 'Add a Project',
+            description: 'Click this button to add a new project to your featured grid. You can specify the title, description, and icons.',
+            side: "bottom",
+            align: 'start'
+          }
+        }
+      ],
+      onDestroyStarted: () => {
+        if (!tour.hasNextStep() || confirm("Are you sure you want to skip the tour?")) {
+          localStorage.setItem("mentorTourCompleted", "true");
+          tour.destroy();
+        }
+      },
+    });
+
+    tour.drive();
+  }
+}

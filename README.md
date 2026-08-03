@@ -73,5 +73,15 @@ The frontend acts as a Single Page Application (SPA) communicating with the back
    - Click **Add Project** to test the `POST` integration.
    - Click the trash can icon on any project to test the `DELETE` integration.
 
+### Deployment (Render)
+This project is configured to be deployed as a single Web Service on Render, which builds the backend and serves the frontend statically.
+
+1. Create a new **Web Service** on Render and connect your GitHub repository.
+2. In the setup page, use the following settings:
+   - **Build Command**: `npm install` (this will install the backend dependencies as defined in the root `package.json`).
+   - **Start Command**: `npm start`
+   - **Environment Variables**: Add your `MONGO_URI`.
+3. Deploy! Render will start the Express backend which automatically serves the `frontend` directory.
+
 ---
 *dev ❤️ by Natnael Getachew — Always Building, Always Learning.*

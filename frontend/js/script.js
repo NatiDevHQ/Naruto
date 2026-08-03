@@ -383,7 +383,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // --- DYNAMIC BACKEND INTEGRATION ---
 
-const API_URL = "http://localhost:3000/api";
+const API_URL = "http://localhost:3000/api" || "/api";
 
 // Fetch initial data
 async function fetchPortfolioData() {

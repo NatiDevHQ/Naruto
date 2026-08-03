@@ -150,7 +150,7 @@
             <div class="avatar-container">
               <div class="avatar-progress" id="avatar-progress"></div>
               <div class="avatar-image">
-                <img src="images/natiIMG.jpg" />
+                <img src="images/natiIMG.jpg" id="profile-image-src" />
                 <!-- OVERLAY IMAGE - Replace with your achievement image URL -->
                 <img
                   src="images/cool.png"
@@ -162,12 +162,21 @@
             </div>
 
             <div class="flex-1">
-              <h1
-                class="text-2xl font-semibold tracking-tighter text-white md:text-3xl"
-              >
-                Hey, I'm Natnael (nati)
-                <span class="wave-hover cursor-pointer">👋</span>
-              </h1>
+              <div class="flex items-center justify-between">
+                <h1
+                  class="text-2xl font-semibold tracking-tighter text-white md:text-3xl"
+                  id="profile-name-container"
+                >
+                  <span id="profile-name">Hey, I'm Natnael (nati)</span>
+                  <span class="wave-hover cursor-pointer">👋</span>
+                </h1>
+                <button
+                  id="edit-profile-btn"
+                  class="ml-4 rounded-full bg-gradient-to-r from-yellow-400 to-orange-500 px-5 py-2 text-sm font-extrabold text-black shadow-[0_0_20px_rgba(250,204,21,0.6)] ring-2 ring-yellow-400 ring-offset-2 ring-offset-black hover:from-yellow-300 hover:to-orange-400 hover:shadow-[0_0_30px_rgba(250,204,21,0.9)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+                >
+                  <i class="fas fa-edit"></i> Edit Profile
+                </button>
+              </div>
               <div class="mt-2 flex items-center gap-4">
                 <a
                   href="mailto:nat.com"
@@ -180,9 +189,8 @@
                     <p class="group text-gray-400">
                       <span
                         class="flex flex-col border-b border-dashed transition-all duration-300 ease-in-out group-hover:-translate-y-full"
-                        >Available for work<span class="invisible h-0">
-                          Reach out</span
-                        ></span
+                        ><span id="profile-bio">Available for work</span
+                        ><span class="invisible h-0"> Reach out</span></span
                       >
                       <span
                         class="absolute top-full flex items-center justify-center transition-all duration-300 ease-in-out group-hover:-translate-y-full"
@@ -248,12 +256,6 @@
 
           <!-- Social buttons and profile image from Natnael's code -->
           <div class="mt-5 flex items-center gap-3">
-            <a
-              href="resume.html"
-              class="hover-glow bg-dark-200 hover:bg-dark-100 flex items-center gap-2 rounded-md px-4 py-2 text-sm transition"
-            >
-              <i class="fas fa-file-alt"></i> Resume
-            </a>
             <a
               href="https://linkedin.com/in/natnael-getachew"
               target="_blank"
@@ -965,11 +967,19 @@
       <section id="projects" class="section-spacing mb-10">
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-lg font-semibold text-white">featured projects</h2>
-          <a
-            href="#"
-            class="text-sm text-gray-400 transition-colors hover:text-white"
-            >view more →</a
-          >
+          <div class="flex items-center gap-3">
+            <button
+              id="add-project-btn"
+              class="rounded-full bg-gradient-to-r from-lime-400 to-green-500 px-5 py-2 text-sm font-extrabold text-black shadow-[0_0_20px_rgba(163,230,53,0.6)] ring-2 ring-lime-400 ring-offset-2 ring-offset-black hover:from-lime-300 hover:to-green-400 hover:shadow-[0_0_30px_rgba(163,230,53,0.9)] hover:-translate-y-1 transition-all duration-300 flex items-center gap-2"
+            >
+              <i class="fas fa-plus"></i> Add Project
+            </button>
+            <a
+              href="#"
+              class="text-sm font-bold text-blue-400 underline decoration-2 underline-offset-4 transition-all hover:text-blue-300 hover:shadow-[0_0_15px_rgba(96,165,250,0.5)]"
+              >view more &rarr;</a
+            >
+          </div>
         </div>
 
         <!-- Magic Bento Projects Grid -->
@@ -987,7 +997,7 @@
           class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-gray-800 pt-6 text-xs text-gray-500 md:flex-row"
         >
           <p>
-            © 2025 <span class="text-white">Natnael Getachew</span> |
+            © <span id="current-year">2025</span> <span class="text-white">Natnael Getachew</span> |
             <a href="#" class="transition-colors hover:text-white">privacy?</a>
           </p>
           <div class="flex gap-4 text-base text-gray-400">
@@ -1078,8 +1088,160 @@
       </nav>
     </div>
 
-    <!-- Scripts -->
+    <!-- Modals -->
+    <!-- Edit Profile Modal -->
+    <div
+      id="edit-profile-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm"
+    >
+      <div
+        class="w-full max-w-md rounded-xl bg-gray-900 p-6 shadow-2xl border border-gray-700"
+      >
+        <h3 class="mb-4 text-xl font-bold text-white">Edit Profile</h3>
+        <form id="edit-profile-form" class="flex flex-col gap-4">
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Name</label>
+            <input
+              type="text"
+              id="edit-name"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Bio</label>
+            <input
+              type="text"
+              id="edit-bio"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Description</label>
+            <textarea
+              id="edit-description"
+              rows="4"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            ></textarea>
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400"
+              >Profile Image URL</label
+            >
+            <input
+              type="text"
+              id="edit-image"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+          <div class="mt-4 flex justify-end gap-3">
+            <button
+              type="button"
+              id="close-profile-modal"
+              class="rounded px-4 py-2 text-gray-400 hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="rounded bg-purple-600 px-4 py-2 text-white hover:bg-purple-700"
+            >
+              Save Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Add Project Modal -->
+    <div
+      id="add-project-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center bg-black/80 backdrop-blur-sm"
+    >
+      <div
+        class="w-full max-w-md rounded-xl bg-gray-900 p-6 shadow-2xl border border-gray-700"
+      >
+        <h3 class="mb-4 text-xl font-bold text-white">Add Project</h3>
+        <form id="add-project-form" class="flex flex-col gap-4">
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Title</label>
+            <input
+              type="text"
+              id="proj-title"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Description</label>
+            <input
+              type="text"
+              id="proj-desc"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              required
+            />
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400"
+              >Label (e.g. Web App)</label
+            >
+            <input
+              type="text"
+              id="proj-label"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="mb-1 block text-sm text-gray-400">Icon Class</label>
+              <input
+                type="text"
+                id="proj-icon"
+                placeholder="fas fa-code"
+                class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+            <div>
+              <label class="mb-1 block text-sm text-gray-400">Icon Color</label>
+              <input
+                type="text"
+                id="proj-iconColor"
+                placeholder="text-blue-400"
+                class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+              />
+            </div>
+          </div>
+          <div>
+            <label class="mb-1 block text-sm text-gray-400">Link URL</label>
+            <input
+              type="text"
+              id="proj-link"
+              class="w-full rounded bg-gray-800 p-2 text-white outline-none focus:ring-2 focus:ring-purple-500"
+            />
+          </div>
+          <div class="mt-4 flex justify-end gap-3">
+            <button
+              type="button"
+              id="close-project-modal"
+              class="rounded px-4 py-2 text-gray-400 hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              class="rounded bg-purple-600 px-4 py-2 text-white hover:bg-purple-700"
+            >
+              Add Project
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Script references -->
     <script src="js/script.js"></script>
   </body>
 </html>
-

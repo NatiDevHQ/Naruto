@@ -2,7 +2,6 @@
 const avatarContainer = document.querySelector(".avatar-container");
 const avatarProgress = document.getElementById("avatar-progress");
 const avatarOverlay = document.getElementById("avatar-overlay");
-const highlightableTexts = document.querySelectorAll(".highlightable");
 const toast = document.getElementById("toast");
 
 let progress = 0;
@@ -82,7 +81,7 @@ function reverseProgress(currentProgress) {
 function highlightSkills() {
   console.log("Highlighting skills - ALL AT ONCE");
   // Highlight all skills simultaneously
-  highlightableTexts.forEach((text) => {
+  document.querySelectorAll(".highlightable").forEach((text) => {
     text.classList.add("highlighted");
     console.log("Highlighted:", text.textContent);
   });
@@ -91,7 +90,7 @@ function highlightSkills() {
 function removeHighlights() {
   console.log("Removing highlights - ALL AT ONCE");
   // Remove all highlights simultaneously
-  highlightableTexts.forEach((text) => {
+  document.querySelectorAll(".highlightable").forEach((text) => {
     text.classList.remove("highlighted");
   });
 }
@@ -116,8 +115,19 @@ function resetAll() {
   }, 1000); // Wait for animations to complete
 }
 
-function showToast() {
+function showToast(title = "Achievement Unlocked!", message = "Key Skills Highlighted", iconClass = "fa-trophy") {
   console.log("Showing toast");
+  
+  const toastTitle = toast.querySelector(".toast-title");
+  const toastMessage = toast.querySelector(".toast-message");
+  const toastIcon = toast.querySelector(".toast-icon i");
+  
+  if (toastTitle) toastTitle.textContent = title;
+  if (toastMessage) toastMessage.textContent = message;
+  if (toastIcon) toastIcon.className = `fas ${iconClass}`;
+  
+  toast.classList.remove("show");
+  void toast.offsetWidth; // trigger reflow to restart animation
   toast.classList.add("show");
 
   // Auto-hide after 4 seconds
@@ -128,6 +138,12 @@ function showToast() {
 
 // Tab functionality for work/education
 document.addEventListener("DOMContentLoaded", function () {
+  // Update footer year dynamically
+  const currentYearEl = document.getElementById("current-year");
+  if (currentYearEl) {
+    currentYearEl.textContent = new Date().getFullYear();
+  }
+
   const workTab = document.getElementById("work-tab");
   const educationTab = document.getElementById("education-tab");
   const workContent = document.getElementById("work-content");
@@ -327,111 +343,9 @@ const skillsData = [
     icon: "fas fa-wind",
     iconColor: "text-cyan-400",
   },
-
 ];
 
-const projectsData = [
-  {
-    color: "#060010",
-    title: "Yuno App",
-    description:
-      "Gamified quiz app for students with leaderboards and progress tracking",
-    label: "Mobile App",
-    icon: "fas fa-gamepad",
-    iconColor: "text-blue-400",
-  },
-  {
-    color: "#060010",
-    title: "TalmidX",
-    description: "Learning Management System with authentication and analytics",
-    label: "Web App",
-    icon: "fas fa-graduation-cap",
-    iconColor: "text-purple-400",
-    link: "https://talmidx.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Gateway System",
-    description:
-      "NFC-based gate control with real-time requests and role-based access",
-    label: "IoT",
-    icon: "fas fa-door-open",
-    iconColor: "text-green-400",
-    link: "https://gate-one-nu.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Hagare",
-    description: "A modern web application built for the community.",
-    label: "Web App",
-    icon: "fas fa-globe-africa",
-    iconColor: "text-yellow-400",
-    link: "https://hagare.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Disruptor",
-    description: "Innovative web solution focused on modern disruption.",
-    label: "Web App",
-    icon: "fas fa-bolt",
-    iconColor: "text-red-400",
-    link: "https://disruptor-nine.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Boulevard",
-    description: "Elegant web interface showcasing digital presence.",
-    label: "Web App",
-    icon: "fas fa-road",
-    iconColor: "text-gray-400",
-    link: "https://boulevard-drab.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Spax Clone",
-    description: "A fully functional clone of a modern application.",
-    label: "Web App",
-    icon: "fas fa-clone",
-    iconColor: "text-blue-500",
-    link: "https://spax-clone.vercel.app/",
-  },
-  {
-    color: "#060010",
-    title: "Bright Real Estate",
-    description: "Property listing and real estate management platform.",
-    label: "Website",
-    icon: "fas fa-building",
-    iconColor: "text-blue-300",
-    link: "https://bright-realestate.com/",
-  },
-  {
-    color: "#060010",
-    title: "Hamamat Spa",
-    description: "Serene business website for spa and wellness center.",
-    label: "Website",
-    icon: "fas fa-spa",
-    iconColor: "text-pink-400",
-    link: "https://hamamatspa.netlify.app/",
-  },
-  {
-    color: "#060010",
-    title: "Inhub Studio",
-    description: "Creative studio portfolio and service showcase.",
-    label: "Agency",
-    icon: "fas fa-paint-brush",
-    iconColor: "text-purple-500",
-    link: "https://inhubstudio.com/",
-  },
-  {
-    color: "#060010",
-    title: "Solo Industrial",
-    description: "Corporate website for industrial manufacturing and services.",
-    label: "Corporate",
-    icon: "fas fa-industry",
-    iconColor: "text-gray-500",
-    link: "https://www.soloindustrial.et/",
-  },
-];
+let projectsData = [];
 
 // Configuration for Magic Bento effects
 const config = {
@@ -448,21 +362,199 @@ const config = {
 // DOM elements
 const skillsGrid = document.getElementById("skillsGrid");
 const projectsGrid = document.getElementById("projectsGrid");
-let globalSpotlight = null;
-let isInsideSection = false;
+let globalSpotlight;
 
-// Initialize the grids
-function initGrids() {
-  initSkillsGrid();
-  initProjectsGrid();
+// Call on load
+document.addEventListener("DOMContentLoaded", () => {
+  initGrids();
 
-  // Initialize spotlight if enabled
-  if (config.enableSpotlight) {
-    initGlobalSpotlight();
+  // Set up resize observer to update spotlights
+  const observer = new ResizeObserver(() => {
+    if (config.enableSpotlight) {
+      initGlobalSpotlight();
+    }
+  });
+
+  observer.observe(document.body);
+
+  // Fetch from backend
+  fetchPortfolioData();
+});
+
+// --- DYNAMIC BACKEND INTEGRATION ---
+
+const API_URL = "http://localhost:3000/api";
+
+// Fetch initial data
+async function fetchPortfolioData() {
+  try {
+    // Fetch Profile
+    const profileRes = await fetch(`${API_URL}/profile`);
+    if (profileRes.ok) {
+      const profile = await profileRes.json();
+      updateProfileUI(profile);
+    }
+
+    // Fetch Projects
+    const projectsRes = await fetch(`${API_URL}/projects`);
+    if (projectsRes.ok) {
+      const data = await projectsRes.json();
+      if (data && data.length > 0) {
+        projectsData = data;
+        initProjectsGrid();
+      }
+    }
+  } catch (error) {
+    console.error("Error fetching portfolio data:", error);
   }
 }
 
-// Initialize skills grid
+function updateProfileUI(profile) {
+  if (profile.name)
+    document.getElementById("profile-name").textContent = profile.name;
+  if (profile.bio)
+    document.getElementById("profile-bio").textContent = profile.bio;
+  if (profile.description) {
+    let htmlDesc = profile.description;
+    const highlightMap = {
+      "creative software developer": "creative",
+      "full-stack development": "fullstack",
+      "UI/UX design": "uiux",
+      "engaging user experiences": "ux",
+      "improve app responsiveness by 20%": "performance",
+      "increased user engagement by 40%": "engagement"
+    };
+    for (const [text, skill] of Object.entries(highlightMap)) {
+      htmlDesc = htmlDesc.replace(text, `<span class="highlightable" data-skill="${skill}">${text}</span>`);
+    }
+    document.getElementById("description-text").innerHTML = htmlDesc;
+  }
+  if (profile.profileImage)
+    document.getElementById("profile-image-src").src = profile.profileImage;
+}
+
+// Modal Logic
+const editProfileModal = document.getElementById("edit-profile-modal");
+const addProjectModal = document.getElementById("add-project-modal");
+
+document
+  .getElementById("edit-profile-btn")
+  .addEventListener("click", async () => {
+    try {
+      const res = await fetch(`${API_URL}/profile`);
+      if (res.ok) {
+        const profile = await res.json();
+        document.getElementById("edit-name").value = profile.name || "";
+        document.getElementById("edit-bio").value = profile.bio || "";
+        document.getElementById("edit-description").value =
+          profile.description || "";
+        document.getElementById("edit-image").value =
+          profile.profileImage || "";
+      }
+    } catch (e) {
+      console.error(e);
+    }
+    editProfileModal.classList.remove("hidden");
+    editProfileModal.classList.add("flex");
+  });
+
+document.getElementById("close-profile-modal").addEventListener("click", () => {
+  editProfileModal.classList.add("hidden");
+  editProfileModal.classList.remove("flex");
+});
+
+document
+  .getElementById("edit-profile-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const updatedProfile = {
+      name: document.getElementById("edit-name").value,
+      bio: document.getElementById("edit-bio").value,
+      description: document.getElementById("edit-description").value,
+      profileImage: document.getElementById("edit-image").value,
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/profile`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(updatedProfile),
+      });
+      if (res.ok) {
+        const profile = await res.json();
+        updateProfileUI(profile);
+        editProfileModal.classList.add("hidden");
+        editProfileModal.classList.remove("flex");
+        showToast("Success!", "Profile updated successfully!", "fa-check-circle");
+      }
+    } catch (error) {
+      console.error("Error updating profile", error);
+    }
+  });
+
+document.getElementById("add-project-btn").addEventListener("click", () => {
+  document.getElementById("add-project-form").reset();
+  addProjectModal.classList.remove("hidden");
+  addProjectModal.classList.add("flex");
+});
+
+document.getElementById("close-project-modal").addEventListener("click", () => {
+  addProjectModal.classList.add("hidden");
+  addProjectModal.classList.remove("flex");
+});
+
+document
+  .getElementById("add-project-form")
+  .addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const newProject = {
+      title: document.getElementById("proj-title").value,
+      description: document.getElementById("proj-desc").value,
+      label: document.getElementById("proj-label").value || "Project",
+      icon: document.getElementById("proj-icon").value || "fas fa-code",
+      iconColor:
+        document.getElementById("proj-iconColor").value || "text-blue-500",
+      link: document.getElementById("proj-link").value || "#",
+    };
+
+    try {
+      const res = await fetch(`${API_URL}/projects`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newProject),
+      });
+      if (res.ok) {
+        const savedProject = await res.json();
+        projectsData.push(savedProject);
+        initProjectsGrid();
+        addProjectModal.classList.add("hidden");
+        addProjectModal.classList.remove("flex");
+        showToast("Success!", "Project added successfully!", "fa-check-circle");
+      }
+    } catch (error) {
+      console.error("Error adding project", error);
+    }
+  });
+
+async function deleteProject(id) {
+  if (!confirm("Are you sure you want to delete this project?")) return;
+  try {
+    const res = await fetch(`${API_URL}/projects/${id}`, { method: "DELETE" });
+    if (res.ok) {
+      projectsData = projectsData.filter((p) => p._id !== id);
+      initProjectsGrid();
+      showToast("Success!", "Project deleted successfully!", "fa-trash-alt");
+    }
+  } catch (error) {
+    console.error("Error deleting project", error);
+  }
+}
+
+function initGrids() {
+  initSkillsGrid();
+  initProjectsGrid();
+}
+
 function initSkillsGrid() {
   skillsGrid.innerHTML = "";
 
@@ -502,7 +594,10 @@ function createMagicBentoCard(data, index, type) {
     cardElement.innerHTML = `
             <div class="magic-bento-card__header w-full flex justify-between items-center">
               <div class="magic-bento-card__label">${data.label}</div>
-              ${data.link ? `<a href="${data.link}" target="_blank" class="text-gray-400 hover:text-white transition-colors z-10 text-sm" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>` : ""}
+              <div class="flex gap-2">
+                ${data.link ? `<a href="${data.link}" target="_blank" class="text-gray-400 hover:text-white transition-colors z-10 text-sm" onclick="event.stopPropagation()"><i class="fas fa-external-link-alt"></i></a>` : ""}
+                ${data._id ? `<button class="text-red-400 hover:text-red-300 transition-colors z-10 text-sm" onclick="event.stopPropagation(); deleteProject('${data._id}')"><i class="fas fa-trash"></i></button>` : ""}
+              </div>
             </div>
             <div class="magic-bento-card__content mt-2">
               <div class="flex items-center gap-3 mb-3">
